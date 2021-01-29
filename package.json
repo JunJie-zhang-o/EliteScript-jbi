@@ -1,0 +1,47 @@
+{
+    "name": "EliteJBI",
+    "displayName": "EliteScript_JBI",
+    "description": "Elite Robot JBI Script",
+    "version": "1.0.4",
+    "publisher": "Elite",
+    "icon": "images/Elite.png",
+    "engines": {
+        "vscode": "^1.52.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Snippets",
+        "Extension Packs"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "jbi",
+                "aliases": [
+                    "jbi",
+                    "jbi"
+                ],
+                "extensions": [
+                    ".jbi"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "jbi",
+                "scopeName": "source.jbi",
+                "path": "./syntaxes/jbi.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "jbi",
+                "path": "./snippets/Elitejbi.code-snippets"
+            }
+        ]
+    },
+    "extensionDependencies": [
+        "mkxml.vscode-filesize"
+    ]
+}

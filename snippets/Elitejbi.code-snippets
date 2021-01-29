@@ -1,0 +1,711 @@
+// data:2021.01.19
+{
+	//逻辑语句
+	"if": {
+		"scope": "jbi",
+		"prefix": "IF",
+		"body": [
+			"IF ${1:} THEN",
+			"ENDIF"
+		],
+		"description": [
+			"if条件判断"
+		]
+	},
+	"ELSEIF": {
+		"scope": "jbi",
+		"prefix": "ELSEIF",
+		"body": [
+			"ELSEIF ${1:} THEN",
+		],
+		"description": [
+			"if条件判断"
+		]
+	},
+	"ELSE": {
+		"scope": "jbi",
+		"prefix": "ELSE",
+		"body": [
+			"ELSE",
+		],
+		"description": [
+			"if条件判断"
+		]
+	},
+	"WHILE": {
+		"scope": "jbi",
+		"prefix": "WHILE",
+		"body": [
+			"WHILE  ${1:} DO",
+		],
+		"description": [
+			"WHILE循环"
+		]
+	},	
+	"CONTINUE": {
+		"scope": "jbi",
+		"prefix": "CONTINUE",
+		"body": [
+			"CONTINUE",
+		],
+		"description": [
+			"WHILE循环"
+		]
+	},
+	"BREAK": {
+		"scope": "jbi",
+		"prefix": "BREAK",
+		"body": [
+			"BREAK",
+		],
+		"description": [
+			"WHILE循环"
+		]
+	},
+	"JUMP": {
+		"scope": "jbi",
+		"prefix": "JUMP",
+		"body": [
+			"JUMP ${1| ,JOB: |}",
+		],
+		"description": [
+			"JUMP跳转"
+		]
+	},
+	"CALL": {
+		"scope": "jbi",
+		"prefix": "CALL",
+		"body": [
+			"CALL ${1| ,JOB: |}",
+		],
+		"description": [
+			"CALL调用"
+		]
+	},
+	"LABEL": {
+		"scope": "jbi",
+		"prefix": "LABEL",
+		"body": [
+			"LABEL *",
+		],
+		"description": [
+			"LABEL标签"
+		]
+	},
+	"RET": {
+		"scope": "jbi",
+		"prefix": "RET", 
+		"body": [
+			"RET ${1| ,IF |}",
+		],
+		"description": [
+			"RET返回调用"
+		]
+	},
+	
+	//常用函数
+	"JBI指令开始": {
+		"scope": "jbi",
+		"prefix": "NOP",
+		"body": [
+			"NOP",
+			"$1",
+			"END"
+		],
+		"description": [
+			"jbi指令从NOP开始"
+		]
+	},
+	"暂停": {
+		"scope": "jbi",
+		"prefix": "PAUSE",
+		"body": [
+			"PAUSE ${1| ,IF |}",
+		],
+		"description": [
+			"机器人执行此指令时程序将立刻暂停"
+		]
+	},	
+	"等待": {
+		"scope": "jbi",
+		"prefix": "WAIT",
+		"body": [
+			"WAIT ${1|0,OT#(0),OG#(0),OGH#(0),IN#(0),IG#(0),IGH#(0),M#(0),MG#(0),MGH#(0),B001,I001,D001,LB001,LI001,LD001|} ${2|=,<>,<,>,<=,>=|} ${3|0,OT#(0),OG#(0),OGH#(0),IN#(0),IG#(0),IGH#(0),M#(0),MG#(0),MGH#(0),B001,I001,D001,LB001,LI001,LD001|} ${4| ,T=0.0|}",
+		],
+		"description": [
+			"机器人执行此指令时程序暂停在此处等待"
+		]
+	},
+	"延时": {
+		"scope": "jbi",
+		"prefix": "TIMER",
+		"body": [ 
+			"TIMER T=${1}s",
+		],
+		"description": [
+			"机器人执行此指令时程序在此处停留指定的时间，随后继续运行"
+		]
+	},
+	"打印": {
+		"scope": "jbi",
+		"prefix": "TPWRITE",
+		"body": [ 
+			"TPWRITE ${1:string}",
+		],
+		"description": [
+			"机器人执行此指令时将指定内容记录到 log 文档并显示在信息栏内"
+		]
+	},
+	"指定坐标系": {
+		"scope": "jbi",
+		"prefix": "CCOOD",
+		"body": [ 
+			"CCOOD ${1|CART,JOINT,USER#(0),USER#(1),USER#(2),USER#(3),USER#(4),USER#(5),USER#(6),USER#(7)|}"
+		],
+		"description": [
+			"JBI 脚本程序中使用此指令时，该指令所在行之后的运算将在指定坐标系下进行"
+		]
+	},
+	//运动指令
+	"关节运动指令": {
+		"scope": "jbi",
+		"prefix": "MOVJ",
+		"body": [ 
+			"MOVJ ${1| ,P|} VJ=${2:INT}% PL=${3|0,1,2,3,4,5,6,7|} ${4| ,ACC=1%,DEC=1%,UNTIL |}"
+		],
+		"description": [
+			"机器人执行该指令时将以关节插补方式移动"
+		]
+	},
+	"直线运动指令": {
+		"scope": "jbi",
+		"prefix": "MOVL",
+		"body": [ 
+			"MOVL ${1| ,P|} ${2|V=1MM/S,VR=1°/S,AV=1MM/S,AVR=1°/S|} PL=${3|0,1,2,3,4,5,6,7|} ${4| ,ACC=1%,DEC=1%,UNTIL |}"
+		],
+		"description": [
+			"机器人执行该指令时将以直线插补方式移动"
+		]
+	},
+	"圆弧运动指令": {
+		"scope": "jbi",
+		"prefix": "MOVC",
+		"body": [ 
+			"MOVC ${1| ,P|} ${2|V=1MM/S,VR=1°/S,AV=1MM/S,AVR=1°/S|} PL=${3|0,1,2,3,4,5,6,7|} ${4| ,ACC=1%,DEC=1%,UNTIL |}"
+		],
+		"description": [
+			"机器人执行该指令时将以圆弧插补方式移动",
+			"此指令必须以3个为一组应用在程序中，否则圆弧轨迹无法实现，系统报错"
+		]
+	},
+	"整圆运动指令": {
+		"scope": "jbi",
+		"prefix": "MOVCA",
+		"body": [ 
+			"MOVCA ${1| ,P|} ${2|V=1MM/S,VR=1°/S,AV=1MM/S,AVR=1°/S|} ${3|POINT1,POINT2,POINT3|} R=1MM ${4| ,DIR=CW,DIR=CCW|} ${5| ,DIST=1MM|} ${6| ,ACC=1%,DEC=1%,UNTIL |}"
+		],
+		"description": [
+			"机器人执行该指令时将以整圆插补方式移动",
+			"此指令必须以3个为一组应用在程序中，否则圆弧轨迹无法实现，系统报错",
+			"DIR和DIST为第一条MOVCA指令后必须有的参数"
+		]
+	},
+	"拖动复现运动指令": {
+		"scope": "jbi",
+		"prefix": "MOVDRAG",
+		"body": [ 
+			"MOVDRAG VJ=${1:1}% DRAGV=${2:1}% JOB:${3}"
+		],
+		"description": [
+			"机器人执行该指令时复现指定拖拽文件中的运动轨迹",
+			"DRAGV：机器人运行拖动轨迹时运动速度百分比，范围为 0%~100%",
+			"JOB:拖动轨迹文件，是一个特殊的 jbi 文件，无法通过示教器直接打开编辑"
+		]
+	},
+	"微段插补指令": {
+		"scope": "jbi",
+		"prefix": "MOVML",
+		"body": [ 
+			"MOVML VJ=${1:1}% PL=${2|0,1,2,3,4,5,6,7|} JOB:${3}"
+		],
+		"description": [
+			"微段插补指令，用于拖动轨迹的复现（需要更改拖动轨迹文件的标识）",
+			"DRAGV：机器人运行拖动轨迹时运动速度百分比，范围为 0%~100%",
+			"JOB:拖动轨迹文件，是一个特殊的 jbi 文件，无法通过示教器直接打开编辑",
+			"1. dragfile：拖动文件，相邻点时间间隔为 10ms",
+			"2. trajfile：轨迹文件，相邻点时间间隔为 1ms，轨迹中包含速度信息",
+			"3. pathfile：路径文件，没有时间间隔，只包含轨迹信息，不包含速度信息"
+		]
+	},
+	//运算指令
+	"清除指令": {
+		"scope": "jbi",
+		"prefix": "CLEAR",
+		"body": [ 
+			"CLEAR ${1|B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|} ${2|1,ALL|}\r"
+		],
+		"description": [
+			"清除变量值并置0的指令"
+		]
+	},
+	"递增指令": {
+		"scope": "jbi",
+		"prefix": "INC",
+		"body": [ 
+			"INC ${1|B001,I001,D001,P001,LB001,LI001,LD001,LP001|}\r"
+		],
+		"description": [
+			"变量值依次递增（加1）的指令"
+		]
+	},
+	"递减指令": {
+		"scope": "jbi",
+		"prefix": "DEC",
+		"body": [ 
+			"DEC ${1|B001,I001,D001,P001,LB001,LI001,LD001,LP001|}"
+		],
+		"description": [
+			"变量值依次递减（减1）的指令"
+		]
+	},
+	"加运算指令": {
+		"scope": "jbi",
+		"prefix": "ADD",
+		"body": [ 
+			"ADD ${1|B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|} ${2|1,0.1,B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|}"
+		],
+		"description": [
+			"加运算指令，变量 #1 与变量 #2 相加，相加后的结果存入变量 #1"
+		]
+	},
+	"减运算指令": {
+		"scope": "jbi",
+		"prefix": "SUB",
+		"body": [ 
+			"SUB ${1|B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|} ${2|1,0.1,B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|}"
+		],
+		"description": [
+			"减运算指令，变量 #1 与变量 #2 相减，相减后的结果存入变量 #1"
+		]
+	},
+	"乘运算指令": {
+		"scope": "jbi",
+		"prefix": "MUL",
+		"body": [ 
+			"MUL ${1|B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|} ${2|1,0.1,B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|}"
+		],
+		"description": [
+			"乘运算指令，变量 #1 与变量 #2 相乘，相乘后的结果存入变量 #1"
+		]
+	},
+	"除运算指令": {
+		"scope": "jbi",
+		"prefix": "DIV",
+		"body": [ 
+			"DIV ${1|B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|} ${2|1,0.1,B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|}"
+		],
+		"description": [
+			"除运算指令，变量 #1 与变量 #2 相除，相除后的结果存入变量 #1"
+		]
+	},
+	"求余运算指令": {
+		"scope": "jbi",
+		"prefix": "MOD",
+		"body": [ 
+			"MOD ${1|B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|} ${2|1,0.1,B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|}"
+		],
+		"description": [
+			"求余运算指令，变量 #1 与变量 #2 求余，相除后的余数存入变量 #1"
+		]
+	},
+	"位与运算指令": {
+		"scope": "jbi",
+		"prefix": "AND",
+		"body": [ 
+			"AND ${1|B001,I001,LB001,LI001|} ${2|1,0.1,B001,I001,LB001,LI01|}"
+		],
+		"description": [
+			"位与运算指令，取变量 #1 与变量 #2 的值转换为二进制之后进行与逻辑运算，",
+			"再将结果转换成十进制整数存入变量 #1"
+		]
+	},
+	"位或运算指令": {
+		"scope": "jbi",
+		"prefix": "OR",
+		"body": [ 
+			"OR ${1|B001,I001,LB001,LI001|} ${2|1,0.1,B001,I001,LB001,LI001|}"
+		],
+		"description": [
+			"位或运算指令，取变量 #1 与变量 #2 的值转换为二进制之后进行或逻辑运算，",
+			"再将结果转换成十进制整数存入变量 #1"
+		]
+	},
+	"取反运算指令": {
+		"scope": "jbi",
+		"prefix": "NOT",
+		"body": [ 
+			"NOT ${1|B001,I001,LB001,LI001|} ${2|1,0.1,B001,I001,LB001,LI001|}"
+		],
+		"description": [
+			"取反运算指令，取变量 #1 与变量 #2 的值转换为二进制之后进行非逻辑运算，",
+			"再将结果转换成十进制整数存入变量 #1"
+		]
+	},
+	"异或运算指令": {
+		"scope": "jbi",
+		"prefix": "XOR",
+		"body": [ 
+			"XOR ${1|B001,I001,LB001,LI001|} ${2|1,0.1,B001,I001,LB001,LI001|}"
+		],
+		"description": [
+			"异或运算指令，取变量 #1 与变量 #2 的值转换为二进制之后进行异或逻辑运算，",
+			"再将结果转换成十进制整数存入变量 #1"
+		]
+	},
+	"建立用户坐标系": {
+		"scope": "jbi",
+		"prefix": "MFRAME",
+		"body": [ 
+			"MFRAME ${1|USER#(0),USER#(1),USER#(2),USER#(3),USER#(4),USER#(5),USER#(6),USER#(7)|} ${2:P1} ${3:P2} ${4:P3}"
+		],
+		"description": [
+			"建立用户坐标系指令。通过已知给定 3 个点的位置数据作为定义点，创建用户坐标。",
+			"例  P1:用户坐标系上的原点",
+			"    P2:用户坐标系上X轴正方向的点",
+			"    P3:用户坐标系平面上的点，用来确定Y轴正方向"
+		]
+	},
+	"计算两点距离": {
+		"scope": "jbi",
+		"prefix": "DIST",
+		"body": [ 
+			"DIST ${1|D001,LD001|} ${2|P001,LP001|} ${3|P002,LP002|}"
+		],
+		"description": [
+			"计算两点之间距离的指令"
+		]
+	},
+	//赋值指令
+	"变量赋值指令": {
+		"scope": "jbi",
+		"prefix": "SET",
+		"body": [ 
+			"SET ${1|B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|} ${2|1,0.1,B001,I001,D001,P001,V001,LB001,LI001,LD001,LP001,LV001|}"
+		],
+		"description": [
+			"变量赋值指令，把变量 #2 的值赋值给变量 #1，保存新的变量 #1",
+		]
+	},
+	"关节位置赋值指令": {
+		"scope": "jbi",
+		"prefix": "SETJOINT",
+		"body": [ 
+			"SETJOINT ${1:P001} ${2:double},${3:double},${4:double},${5:double},${6:double},${7:double},0.0000,0.0000"
+		],
+		"description": [
+			"关节位置赋值指令，把机器人当前 8 个轴 (6 个关节) 的角度值以关节坐标值的形式",
+			"保存在指定的位置变量中"
+		]
+	},
+	"空间位置赋值指令": {
+		"scope": "jbi",
+		"prefix": "SETPOSE",
+		"body": [ 
+			"SETPOSE ${1:V001} ${2:double},${3:double},${4:double},${5:double},${6:double},${7:double}"
+		],
+		"description": [
+			"空间位置赋值指令，把机器人当前位姿以空间坐标值的形式保存在指定的位置变量中"
+		]
+	},
+	"获取当前关节坐标位置": {
+		"scope": "jbi",
+		"prefix": "GETPOS",
+		"body": [ 
+			"GETPOS ${1:P001}"
+		],
+		"description": [
+			"获取当前关节坐标位置指令，把当前关节坐标 J1,J2,J3,J4,J5,J6,J7,J8 赋值到 P 变量中"
+		]
+	},
+	"获取工具坐标数据": {
+		"scope": "jbi",
+		"prefix": "GETTOOLFRAME",
+		"body": [ 
+			"GETTOOLFRAME ${1:V001} ${2|TOOL#(0),TOOL#(1),TOOL#(2),TOOL#(3),TOOL#(4),TOOL#(5),TOOL#(6),TOOL#(7)|}"
+		],
+		"description": [
+			"获取工具坐标数据到 V 变量中"
+		]
+	},
+	"获取用户坐标数据": {
+		"scope": "jbi",
+		"prefix": "GETUSERFRAME",
+		"body": [ 
+			"GETUSERFRAME ${1:V001} ${2|USER#(0),USER#(1),USER#(2),USER#(3),USER#(4),USER#(5),USER#(6),USER#(7)|}"
+		],
+		"description": [
+			"获取用户坐标数据到 V 变量中"
+		]
+	},
+	"设置V变量到工具": {
+		"scope": "jbi",
+		"prefix": "SETTOOLFRAME",
+		"body": [ 
+			"SETTOOLFRAME ${1|TOOL#(0),TOOL#(1),TOOL#(2),TOOL#(3),TOOL#(4),TOOL#(5),TOOL#(6),TOOL#(7)|} ${2:V001}"
+		],
+		"description": [
+			"获取用户坐标数据到 V 变量中"
+		]
+	},
+	//输入输出指令
+	"数字信号输出指令": {
+		"scope": "jbi",
+		"prefix": "DOUT",
+		"body": [ 
+			"DOUT ${1|OT#(1,OG#(1,OGH#(1|}) ${2|ON,OFF,B001,D001,I001,LB001,LD001,LI001,1|}"
+		],
+		"description": [
+			"数字信号输出指令，将指定状态赋值给特定的 Y 信号"
+		]
+	},
+	"读取输入信号": {
+		"scope": "jbi",
+		"prefix": "DIN",
+		"body": [ 
+			"DIN ${1|B001,D001,I001,LB001,LD001,LI001|} ${2|OT#(1,OG#(1,OGH#(1,IN#(1,IG#(1,IGH#(1|})"
+		],
+		"description": [
+			"读取指定的输入信号（X 变量）并将其从二进制数字转换为十进制整数后赋值给相应变量"
+		]
+	},
+	"模拟量信号输出指令": {
+		"scope": "jbi",
+		"prefix": "AOUT",
+		"body": [ 
+			"AOUT AO#(${1:1}) ${2:double}"
+		],
+		"description": [
+			"模拟量信号输出指令，将指定数值赋值给特定的 AO 信号"
+		]
+	},
+	"获取模拟量输入口电压": {
+		"scope": "jbi",
+		"prefix": "AIN",
+		"body": [ 
+			"AIN ${2|D001,LD001|} AI#(${1:1})"
+		],
+		"description": [
+			"获取模拟量输入口电压并负载给相应变量"
+		]
+	},
+	"虚拟信号输出指令": {
+		"scope": "jbi",
+		"prefix": "MOUT",
+		"body": [ 
+			"MOUT ${1|M#(1,MG#(1,MGH#(1|}) ${2|ON,OFF,B001,D001,I001,LB001,LD001,LI001,1|}"
+		],
+		"description": [
+			"虚拟信号输出指令，将指定状态赋值给特定的 M 信号"
+		]
+	},
+	"读取指定的M信号": {
+		"scope": "jbi",
+		"prefix": "MIN",
+		"body": [ 
+			"MIN ${1|B001,D001,I001,LB001,LD001,LI001|} ${2|M#(1,MG#(1,MGH#(1|})"
+		],
+		"description": [
+			"读取指定的 M 信号并将其从二进制数字转换为十进制整数后赋值给相应变量"
+		]
+	},
+	"脉冲操作": {
+		"scope": "jbi",
+		"prefix": "PLUSE",
+		"body": [ 
+			"PLUSE ${1|OT#(1,OG#(1,OGH#(1|}) T=${2}"
+		],
+		"description": [
+			"对特定信号进行脉冲操作"
+		]
+	},
+	//JBI特殊指令
+	"位姿相乘指令": {
+		"scope": "jbi",
+		"prefix": "POSEMUL",
+		"body": [ 
+			"POSEMUL V${1:001} V${2:002}"
+		],
+		"description": [
+			"位姿相乘指令。将 V002 作为一个空间偏移量，附加到 V001 上"
+		]
+	},
+	"逆解指令": {
+		"scope": "jbi",
+		"prefix": "POSETOJOINT",
+		"body": [ 
+			"POSETOJOINT V${1:001} P${2:002}"
+		],
+		"description": [
+			"逆解指令，把空间坐标转换成关节坐标,并将结果存入变量P中"
+		]
+	},
+	"正解指令": {
+		"scope": "jbi",
+		"prefix": "JOINTTOPOSE",
+		"body": [ 
+			"JOINTTOPOSE P${1:001} V${2:002}"
+		],
+		"description": [
+			"正解指令，把关节坐标转换成空间坐标，并将结果存入变量V中"
+		]
+	},
+	"透传初始化": {
+		"scope": "jbi",
+		"prefix": "TTINIT",
+		"body": [ 
+			"TTINIT T=${1:double} LOOKAHEAD=${2:double} SMOOTHNESS=${3:double}"
+		],
+		"description": [
+			"透传初始化",
+			" T：采样时间，范围为 0.002~0.1，单位为 s；",
+			"LOOKAHEAD：前瞻时间，范围为 0.01~1，单位为 s",
+			"SMOOTHNESS：轨迹平滑指数，范围 0~1，目前未使用"
+		]
+	},
+	"透传记录当前位置": {
+		"scope": "jbi",
+		"prefix": "TTSTARTJOINT",
+		"body": [ 
+			"TTSTARTJOINT P${1:001}"
+		],
+		"description": [
+			"透传记录当前位置",
+		]
+	},
+	"透传增加目标位置": {
+		"scope": "jbi",
+		"prefix": "TTARGETJOINT",
+		"body": [ 
+			"TTARGETJOINT P${1:001}"
+		],
+		"description": [
+			"透传增加目标位置",
+		]
+	},
+	"透传结束": {
+		"scope": "jbi",
+		"prefix": "TTSTOP",
+		"body": [ 
+			"TTSTOP"
+		],
+		"description": [
+			"透传结束",
+		]
+	},
+	"设置作业文件": {
+		"scope": "jbi",
+		"prefix": "SETMLFILE",
+		"body": [ 
+			"SETMLFILE P${1:001} JOB:${2}"
+		],
+		"description": [
+			"设置作业文件指令,将直角坐标位姿点位变换为关节坐标数据,供MOVML指令使用",
+		]
+	},
+	//其他指令
+	"保存P变量指令": {
+		"scope": "jbi",
+		"prefix": "SAVEVARP",
+		"body": [ 
+			"SAVEVARP"
+		],
+		"description": [
+			"保存P变量指令",
+			"注：P 变量在从自动模式切换到其他模式、急停、自动运行结束、监视界面修改 P",
+			"变量的值这几种情况下也会将其保存到文件中。"
+		]
+	},
+	"设置负载": {
+		"scope": "jbi",
+		"prefix": "SETPAYLOAD",
+		"body": [ 
+			"SETPAYLOAD ${1|TOOL(0),TOOL(1),TOOL(2),TOOL(3),TOOL(4),TOOL(5),TOOL(6),TOOL(7)|} M=${2:double} X=${3:double} Y=${4:double} Z=${5:double}"
+		],
+		"description": [
+			"设置机器人负载",
+			"M：负载公斤数 X，Y,Z：质心偏移的空间位置，范围：-5000~5000",
+		]
+	},
+	//脚本指令
+	"运行指定脚本文件": {
+		"scope": "jbi",
+		"prefix": "STARTLUA",
+		"body": [ 
+			"STARTLUA INDEX=${1|1,2,3,4,5,6,7,8|}"
+		],
+		"description": [
+			"运行指定的脚本文件。使用该指令时须先在脚本界面设置好脚本文件",
+		]
+	},
+	"停止脚本文件": {
+		"scope": "jbi",
+		"prefix": "STOPLUA",
+		"body": [ 
+			"STOPLUA INDEX=${1|1,2,3,4,5,6,7,8|}"
+		],
+		"description": [
+			"停止脚本文件",
+		]
+	},
+	"重载脚本文件": {
+		"scope": "jbi",
+		"prefix": "RESTARTLUA",
+		"body": [ 
+			"RESTARTLUA INDEX=${1|1,2,3,4,5,6,7,8|}"
+		],
+		"description": [
+			"重载脚本文件",
+		]
+	},
+	"获取脚本状态": {
+		"scope": "jbi",
+		"prefix": "GETLUASTATE",
+		"body": [ 
+			"GETLUASTATE B#(${2:001}) INDEX=${1|1,2,3,4,5,6,7,8|}"
+		],
+		"description": [
+			"获取脚本状态",
+		]
+	},
+	"位姿求逆":{
+		"scope":"jbi",
+		"prefix": "POSEINV",
+		"body": [
+			"POSEINV V${1:000}"
+		],
+		"description": [
+			"进行位姿求逆，求逆后还返回到该变量"
+		]
+	},
+	"加载作业文件":{
+		"scope": "jbi",
+		"prefix": "LOADML",
+		"body": [
+			"LOADML JOB:${1:...}"
+		],
+		"description": [
+			"会将执行的文件内容加载到内存中，在使用MOVML指令运行文件时可以减少时间，最少存放32个文件"
+		]
+	},
+	"卸载作业文件":{
+		"scope": "jbi",
+		"prefix": "UNLOADML",
+		"body": [
+			"UNLOADML JOB:${1:...}"
+		],
+		"description": [
+			"从内存中卸载文件"
+		]
+	}
+
+}
