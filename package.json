@@ -10,8 +10,7 @@
     },
     "categories": [
         "Programming Languages",
-        "Snippets",
-        "Extension Packs"
+        "Snippets"
     ],
     "contributes": {
         "languages": [
@@ -41,7 +40,5 @@
             }
         ]
     },
-    "extensionDependencies": [
-        "mkxml.vscode-filesize"
-    ]
+
 }
