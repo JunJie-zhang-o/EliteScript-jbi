@@ -1,5 +1,11 @@
 # Change Log
 
+- ### 1.0.2    2022.02.11
+
+  - 更新至与V3.0.1版本一致
+
+    Updated to be consistent with V3.0.1
+
 - ### 1.0.1	2021.03.06
 
   - 添加Movml中的关键字高亮
