@@ -2,7 +2,7 @@
     "name": "EliteJBI",
     "displayName": "EliteScript_JBI",
     "description": "Elite Robot JBI Script",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "publisher": "Elite",
     "icon": "images/Elite.png",
     "engines": {
