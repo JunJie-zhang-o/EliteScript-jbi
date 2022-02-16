@@ -1,6 +1,12 @@
 
 # Change Log
 
+- ### 1.0.7	2022.02.16
+
+  - 补充ml文件的高亮和代码块部分
+
+    add syntaxes & snippets for ml path file
+
 - ### 1.0.6    2022.02.11
 
   - 更新至与V3.0.1版本一致
