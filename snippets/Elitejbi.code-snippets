@@ -768,6 +768,89 @@
 		"description": [
 			"从内存中卸载文件"
 		]
-	}
+	},
+
+	// ml文件标志部分
+	"软件版本号":{
+		"scope": "jbi",
+		"prefix": "version",
+		"body": [
+			"version ${1}"
+		],
+		"description": [
+			"当前软件版本号"
+		]
+	},
+	"间隔时间":{
+		"scope": "jbi",
+		"prefix": "interval",
+		"body": [
+			"interval [${1}]ms"
+		],
+		"description": [
+			"间隔时间"
+		]
+	},
+	"参考关节点":{
+		"scope": "jbi",
+		"prefix": "refJointPos",
+		"body": [
+			"refJointPos [${j1},${j2},${j3},${j4},${j5},${j6},${j7},${j8}]"
+		],
+		"description": [
+			"参考关节点"
+		]
+	},
+	"长度":{
+		"scope": "jbi",
+		"prefix": "length",
+		"body": [
+			"length [${1}]"
+		],
+		"description": [
+			"点位长度"
+		]
+	},
+	"类型":{
+		"scope": "jbi",
+		"prefix": "postype",
+		"body": [
+			"postype [${1|pose,joint|}]"
+		],
+		"description": [
+			"类型"
+		]
+	},
+	"io输出":{
+		"scope": "jbi",
+		"prefix": "outputNumber",
+		"body": [
+			"outputNumber [${1}]"
+		],
+		"description": [
+			"io输出"
+		]
+	},
+	"参考坐标系":{
+		"scope": "jbi",
+		"prefix": "refFrame",
+		"body": [
+			"refFrame {${x},${y},${z},${rx},${ry},${rz}}"
+		],
+		"description": [
+			"参考坐标系"
+		]
+	},
+	"输出":{
+		"scope": "jbi",
+		"prefix": "output",
+		"body": [
+			"output [${1}]"
+		],
+		"description": [
+			"输出"
+		]
+	},
+
 
 }
