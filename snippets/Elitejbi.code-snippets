@@ -835,7 +835,7 @@
 		"scope": "jbi",
 		"prefix": "refFrame",
 		"body": [
-			"refFrame {${x},${y},${z},${rx},${ry},${rz}}"
+			"refFrame [${x},${y},${z},${rx},${ry},${rz}]"
 		],
 		"description": [
 			"参考坐标系"
